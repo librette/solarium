@@ -1,0 +1,10 @@
+extensions:
+	solarium: Librette\Solarium\DI\SolariumExtension
+
+solarium:
+	debugger: true
+	plugins:
+		foo: LibretteTests\Solarium\PluginMock
+		bar:
+			class: LibretteTests\Solarium\PluginMock
+			options: [key: value]

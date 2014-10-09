@@ -1,0 +1,6 @@
+extensions:
+	solarium: Librette\Solarium\DI\SolariumExtension
+	events: Kdyby\Events\DI\EventsExtension
+
+solarium:
+	debugger: true

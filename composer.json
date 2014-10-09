@@ -1,0 +1,26 @@
+{
+	"name": "librette/solarium",
+	"authors": [
+		{
+			"name": "David Matějka",
+			"email": "matej21@matej21.cz"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Librette\\Solarium\\": "src/"
+		}
+	},
+	"require": {
+		"solarium/solarium": "~3.2",
+		"kdyby/events": "*",
+		"nette/di": "~2.2.0",
+		"nette/utils": "~2.2.0"
+	},
+	"require-dev": {
+		"tracy/tracy": "~2.2.0",
+		"nette/bootstrap": "~2.2.0",
+		"nette/neon": "~2.2.0",
+		"nette/tester": "@dev"
+	}
+}

@@ -1,0 +1,7 @@
+extensions:
+	solarium: Librette\Solarium\DI\SolariumExtension
+
+solarium:
+	debugger: true
+	host: foo
+	port: 123

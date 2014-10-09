@@ -1,0 +1,11 @@
+extensions:
+	solarium: Librette\Solarium\DI\SolariumExtension
+
+solarium:
+	debugger: true
+	endpoints:
+		foo:
+			host: host1
+		bar:
+			host: host2
+			default: true
