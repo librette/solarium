@@ -127,4 +127,26 @@ class Query extends BaseQuery
 		return $this->getOption('entity');
 	}
 
+
+	public function setCustomParameters(array $parameters)
+	{
+		return $this->setOption('parameters', $parameters);
+	}
+
+
+	public function setCustomParameter($key, $value)
+	{
+		$params = $this->getCustomParameters();
+		$params[$key] = $value;
+		$this->setCustomParameters($params);
+
+		return $this;
+	}
+
+
+	public function getCustomParameters()
+	{
+		return $this->getOption('parameters') ?: [];
+	}
+
 }
