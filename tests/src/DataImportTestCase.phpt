@@ -38,6 +38,21 @@ class DataImportTestCaseTest extends AbstractSolariumTestCase
 
 	}
 
+
+	public function testCustomParameters()
+	{
+		/** @var $query Query */
+		$query = $this->client->createQuery(Query::QUERY_DATAIMPORT);
+		$query->setCustomParameters([
+			'foo'   => 'bar',
+			'lorem' => 'ipsum',
+		]);
+		$query->setCustomParameter('dolor', 'sit');
+		$request = $this->client->createRequest($query);
+		Assert::match('%a%&foo=bar&lorem=ipsum&dolor=sit', $request->getQueryString());
+
+	}
+
 }
 
 
