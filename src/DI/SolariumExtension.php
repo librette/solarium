@@ -4,7 +4,6 @@ namespace Librette\Solarium\DI;
 use Kdyby\Events\DI\EventsExtension;
 use Librette\Solarium\QueryType\DataImport\Query as DataImportQuery;
 use Nette;
-use Nette\DI\Compiler;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ServiceDefinition;
 
