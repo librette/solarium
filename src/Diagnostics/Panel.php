@@ -128,7 +128,15 @@ class Panel extends Object implements IBarPanel, Subscriber
 			Dumper::dump($result->getDebug(), [Dumper::DEPTH => 6]);
 
 			echo '</td><td>';
-			echo $data['response']['numFound'];
+			if (isset($data['grouped'])) {
+				$groupInfo = [];
+				foreach ($data['grouped'] as $name => $info) {
+					$groupInfo[] = $name . ' - ' . $info['matches'] . (isset($info['ngroups']) ? ' (' . $info['ngroups'] . ' groups)' : '');
+				}
+				echo implode(', ', $groupInfo);
+			} else {
+				echo $data['response']['numFound'];
+			}
 			echo '</td></tr>';
 		}
 		echo '</table>';
