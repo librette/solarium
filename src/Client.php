@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * @author David Matejka
  */
-class Client extends BaseClient
+class Client extends BaseClient implements IQueryable
 {
 
 	public function __construct($options = NULL, EventDispatcherInterface $eventDispatcher = NULL)
@@ -26,6 +26,16 @@ class Client extends BaseClient
 		if ($origDispatcher) {
 			$this->eventDispatcher = $origDispatcher;
 		}
+	}
+
+
+	/**
+	 * @param IQuery
+	 * @return mixed|ResultSet
+	 */
+	public function fetch(IQuery $query)
+	{
+		return $query->fetch($this);
 	}
 
 }
