@@ -11,6 +11,7 @@ use Solarium\Core\Event\PostExecute;
 use Solarium\Core\Event\PreCreateRequest;
 use Solarium\Exception\HttpException;
 use Solarium\QueryType\Select\Query\Query as SelectQuery;
+use Solarium\QueryType\Select\Result\Debug\TimingPhase;
 use Solarium\QueryType\Select\Result\Result as SelectResult;
 use Tracy\Debugger;
 use Tracy\Dumper;
@@ -112,22 +113,15 @@ class Panel extends Object implements IBarPanel, Subscriber
 	{
 		$s = '';
 		ob_start();
+		echo '<div class="tracy-inner">';
 		echo '<table>';
-		echo '<tr><th>(ms)</th><th>Parameters</th><th>Rows</th>';
 		foreach ($this->requests as $request) {
 			/** @var SelectResult $result */
 			$result = $request->getResult();
 			$data = $result->getData();
 
 			echo '<tr><td>';
-			echo $data['responseHeader']['QTime'] - $result->getDebug()->getTiming()->getPhase('process')->getTiming('debug');
-			echo '</td><td>';
-
-			Dumper::dump($data['responseHeader']['params']);
-			echo '<span>Debug:</span>';
-			Dumper::dump($result->getDebug(), [Dumper::DEPTH => 6]);
-
-			echo '</td><td>';
+			echo '<h3 style="font-weight:bold;font-size: 15px">Rows:</h3>';
 			if (isset($data['grouped'])) {
 				$groupInfo = [];
 				foreach ($data['grouped'] as $name => $info) {
@@ -137,9 +131,38 @@ class Panel extends Object implements IBarPanel, Subscriber
 			} else {
 				echo $data['response']['numFound'];
 			}
+			echo '<h3 style="font-weight:bold;font-size: 15px">Parameters:</h3><table style="margin-top: 5px">';
+			foreach($data['responseHeader']['params'] as $key => $value) {
+				echo '<tr><th>' . $key . '</th><td>' . (is_scalar($value) ? $value : Dumper::dump($value)) . '</td></tr>';
+			}
+			echo '</table>';
+
+			echo '<h3 style="font-weight: bold;font-size:16px">Timing: </h3>';
+			echo '<h4 style="font-weight: bold;font-size:14px">' . ($data['responseHeader']['QTime'] - $result->getDebug()->getTiming()->getPhase('process')->getTiming('debug')) . 'ms (without debug)</h4>';
+			echo '<table>';
+			/** @var TimingPhase $phase */
+			foreach ($result->getDebug()->getTiming() as $name => $phase) {
+				echo '<tr>';
+				echo '<th>' . $name . "</th>";
+				echo '<td>' . $phase->getTime() . 'ms</td>';
+				echo '<td><table>';
+				foreach ($phase->getTimings() as $key => $time) {
+					echo '<tr><th>' . $key . "</t><td>" . $time . 'ms</td></tr>';
+				}
+				echo '</table></td>';
+				echo '</tr>';
+			}
+			echo '</table>';
+			echo '<h3 style="font-weight: bold;font-size:16px">Explain:</h3>';
+			Dumper::dump($result->getDebug()->getExplain(), [Dumper::DEPTH => 6]);
+			if(count($result->getDebug()->getExplainOther())) {
+				Dumper::dump($result->getDebug()->getExplainOther(), [Dumper::DEPTH => 6]);
+			}
+
 			echo '</td></tr>';
 		}
 		echo '</table>';
+		echo '</div>';
 		$s .= ob_get_clean();
 
 		return empty($this->requests) ? '' :
