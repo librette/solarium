@@ -17,13 +17,13 @@
 	"require": {
 		"solarium/solarium": "~3.2",
 		"kdyby/events": "*",
-		"nette/di": "~2.2.0",
-		"nette/utils": "~2.2.0"
+		"nette/di": "~2.2",
+		"nette/utils": "~2.2"
 	},
 	"require-dev": {
-		"tracy/tracy": "~2.2.0",
-		"nette/bootstrap": "~2.2.0",
-		"nette/neon": "~2.2.0",
+		"tracy/tracy": "~2.2",
+		"nette/bootstrap": "~2.2",
+		"nette/neon": "~2.2",
 		"nette/tester": "@dev"
 	}
 }
