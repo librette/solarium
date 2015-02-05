@@ -11,6 +11,11 @@ use Solarium\QueryType\Select\Result\Result as SelectResult;
  */
 class ResultSet extends Object implements \IteratorAggregate, IResultSet
 {
+	/** @var array function(ResultSet $resultSet) */
+	public $onBeforeExecute = [];
+
+	/** @var array function(ResultSet $resultSet, SelectResult $result) */
+	public $onExecute = [];
 
 	/** @var IQueryable */
 	protected $queryable;
@@ -121,7 +126,9 @@ class ResultSet extends Object implements \IteratorAggregate, IResultSet
 		if ($this->query instanceof IQueryModifier) {
 			$this->query->modifyQuery($this->selectQuery);
 		}
+		$this->onBeforeExecute($this);
 		$this->selectResult = $this->queryable->execute($this->selectQuery);
+		$this->onExecute($this, $this->selectResult);
 	}
 
 
