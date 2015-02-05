@@ -19,7 +19,7 @@ class SolariumExtension extends CompilerExtension
 		'debugger'   => '%debugMode%',
 		'endpoints'  => [],
 		'queryTypes' => [
-			DataImportQuery::QUERY_DATAIMPORT => '\Librette\Solarium\QueryType\DataImport\Query',
+			DataImportQuery::QUERY_DATAIMPORT => 'Librette\Solarium\QueryType\DataImport\Query',
 		],
 		'plugins'    => [],
 	];
@@ -42,8 +42,8 @@ class SolariumExtension extends CompilerExtension
 		                    ->setClass('Librette\Solarium\Client', [[]]);
 		if ($config['debugger']) {
 			$panel = $builder->addDefinition($this->prefix('panel'))
-			                 ->setClass('\Librette\Solarium\Diagnostics\Panel')
-			                 ->setFactory('\Librette\Solarium\Diagnostics\Panel::register', [$this->prefix('@client')]);
+			                 ->setClass('Librette\Solarium\Diagnostics\Panel')
+			                 ->setFactory('Librette\Solarium\Diagnostics\Panel::register', [$this->prefix('@client')]);
 			$panel->addTag(EventsExtension::TAG_SUBSCRIBER);
 		}
 		$this->configureEndpoints($config, $solarium);
