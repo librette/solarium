@@ -28,6 +28,24 @@ class FieldExpression extends Object implements IExpression
 
 
 	/**
+	 * @return IExpression
+	 */
+	public function getExpression()
+	{
+		return $this->expression;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getField()
+	{
+		return $this->field;
+	}
+
+
+	/**
 	 * @return string
 	 */
 	public function build()
