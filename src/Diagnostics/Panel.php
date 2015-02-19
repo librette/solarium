@@ -121,6 +121,9 @@ class Panel extends Object implements IBarPanel, Subscriber
 		$data = $e->getBody();
 		try {
 			$data = Json::decode($data);
+			if (isset($data->error->trace)) {
+				$data->error->trace = explode("\n", $data->error->trace);
+			}
 		} catch (JsonException $e) {
 		}
 		$message = NULL;
