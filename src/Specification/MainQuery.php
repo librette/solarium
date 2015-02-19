@@ -21,7 +21,7 @@ class MainQuery extends Object implements ISpecification, IExpressionQuery
 	 */
 	public function __construct(/* IExpression */ $expression = NULL)
 	{
-		if (func_num_args() > 1 && ($expr = func_get_arg(2)) instanceof IExpression) {
+		if (func_num_args() > 1 && ($expr = func_get_arg(1)) instanceof IExpression) {
 			trigger_error('Passing field name as a first argument is deprecated. Pass FieldExpression directly.', E_USER_DEPRECATED);
 			$this->expression = new FieldExpression($expression, $expr);
 		} else {
