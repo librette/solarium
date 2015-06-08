@@ -227,11 +227,11 @@ class Panel extends Object implements IBarPanel, Subscriber
 				}
 				echo '</table>';
 			}
-			if ($result instanceof SelectQuery) {
+			if ($result instanceof SelectResult) {
 				echo '<h3 style="font-weight: bold;font-size:16px">Explain:</h3>';
-				Dumper::dump($result->getDebug()->getExplain(), [Dumper::DEPTH => 6]);
+				Dumper::dump($result->getDebug()->getExplain(), [Dumper::DEPTH => 16]);
 				if (count($result->getDebug()->getExplainOther())) {
-					Dumper::dump($result->getDebug()->getExplainOther(), [Dumper::DEPTH => 6]);
+					Dumper::dump($result->getDebug()->getExplainOther(), [Dumper::DEPTH => 16]);
 				}
 			}
 
