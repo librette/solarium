@@ -28,9 +28,9 @@ abstract class Composite extends Object implements IExpression
 	 */
 	public function build()
 	{
-		return implode($this->getSeparator(), array_map(function (IExpression $expression) {
+		return '(' . implode($this->getSeparator(), array_map(function (IExpression $expression) {
 			return $expression->build();
-		}, $this->args));
+		}, $this->args)) . ')';
 	}
 
 
