@@ -33,6 +33,13 @@ class SolariumExtension extends CompilerExtension
 		'default' => NULL,
 	];
 
+	public function __construct()
+	{
+		if (PHP_SAPI === 'cli') {
+			$this->defaults['debugger'] = FALSE;
+		}
+	}
+
 
 	public function loadConfiguration()
 	{
