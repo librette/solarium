@@ -1,16 +1,16 @@
 <?php
+
 namespace Librette\Solarium;
 
-use Nette\Object;
+use Nette\SmartObject;
 use Nette\Utils\Paginator;
 use Solarium\QueryType\Select\Query\Query as SelectQuery;
 use Solarium\QueryType\Select\Result\Result as SelectResult;
 
-/**
- * @author David Matejka
- */
-class ResultSet extends Object implements \IteratorAggregate, IResultSet
+class ResultSet implements \IteratorAggregate, IResultSet
 {
+	use SmartObject;
+
 	/** @var array function(ResultSet $resultSet) */
 	public $onBeforeExecute = [];
 
@@ -35,7 +35,7 @@ class ResultSet extends Object implements \IteratorAggregate, IResultSet
 	 * @param IQueryable
 	 * @param IQuery
 	 */
-	public function __construct(SelectQuery $selectQuery, IQueryable $queryable, IQuery $query = NULL)
+	public function __construct(SelectQuery $selectQuery, IQueryable $queryable, IQuery $query = null)
 	{
 		$this->queryable = $queryable;
 		$this->selectQuery = $selectQuery;
@@ -48,7 +48,7 @@ class ResultSet extends Object implements \IteratorAggregate, IResultSet
 	 * @param bool fills paginator "itemCount", if true, solr query will be executed immediately
 	 * @throws InvalidStateException
 	 */
-	public function applyPaginator(Paginator $paginator, $fillItemCount = TRUE)
+	public function applyPaginator(Paginator $paginator, $fillItemCount = true)
 	{
 		$this->applyPaging($paginator->getOffset(), $paginator->getLength());
 		if ($fillItemCount) {
@@ -62,7 +62,7 @@ class ResultSet extends Object implements \IteratorAggregate, IResultSet
 	{
 		$this->ensureNotExecuted();
 		$this->selectQuery->setStart($offset)
-		                  ->setRows($limit);
+			->setRows($limit);
 	}
 
 
@@ -132,7 +132,7 @@ class ResultSet extends Object implements \IteratorAggregate, IResultSet
 	}
 
 
-	private function  ensureNotExecuted()
+	private function ensureNotExecuted()
 	{
 		if ($this->selectResult) {
 			throw new InvalidStateException("You cannot modify result set, that was fetched from the storage.");

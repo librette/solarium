@@ -1,9 +1,7 @@
 <?php
+
 namespace Librette\Solarium\Specification;
 
-/**
- * @author David Matejka
- */
 interface IInversableSpecification
 {
 
@@ -11,5 +9,5 @@ interface IInversableSpecification
 	 * @param bool
 	 * @return void
 	 */
-	public function inverse($inverse = TRUE);
+	public function inverse($inverse = true);
 }

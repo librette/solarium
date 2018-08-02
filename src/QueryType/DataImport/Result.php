@@ -1,11 +1,9 @@
 <?php
+
 namespace Librette\Solarium\QueryType\DataImport;
 
 use Solarium\Core\Query\Result\QueryType as BaseResult;
 
-/**
- * @author David Matejka
- */
 class Result extends BaseResult
 {
 

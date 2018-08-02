@@ -1,12 +1,10 @@
 <?php
+
 namespace Librette\Solarium;
 
 use Nette\Utils\Paginator;
 
 
-/**
- * @author David Matejka
- */
 interface IResultSet extends \Traversable, \Countable
 {
 

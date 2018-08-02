@@ -1,16 +1,15 @@
 <?php
+
 namespace Librette\Solarium\Specification;
 
 use Librette\Solarium\Expressions\FieldExpression;
 use Librette\Solarium\Expressions\IExpression;
-use Nette\Object;
+use Nette\SmartObject;
 use Solarium\QueryType\Select\Query\Query;
 
-/**
- * @author David Matejka
- */
-class MainQuery extends Object implements ISpecification, IExpressionQuery
+class MainQuery implements ISpecification, IExpressionQuery
 {
+	use SmartObject;
 
 	/** @var IExpression|null */
 	protected $expression;
@@ -19,8 +18,9 @@ class MainQuery extends Object implements ISpecification, IExpressionQuery
 	/**
 	 * @param IExpression
 	 */
-	public function __construct(/* IExpression */ $expression = NULL)
-	{
+	public function __construct(/* IExpression */
+		$expression = null
+	) {
 		if (func_num_args() > 1 && ($expr = func_get_arg(1)) instanceof IExpression) {
 			trigger_error('Passing field name as a first argument is deprecated. Pass FieldExpression directly.', E_USER_DEPRECATED);
 			$this->expression = new FieldExpression($expression, $expr);
@@ -41,7 +41,7 @@ class MainQuery extends Object implements ISpecification, IExpressionQuery
 
 	public function match(Query $query)
 	{
-		if ($this->expression && ($queryString = $this->expression->build()) !== NULL) {
+		if ($this->expression && ($queryString = $this->expression->build()) !== null) {
 			$query->setQuery($queryString);
 		}
 	}

@@ -1,13 +1,11 @@
 <?php
+
 namespace Librette\Solarium;
 
 use Solarium\Core\Client\Endpoint;
 use Solarium\Core\Query\QueryInterface;
 use Solarium\Core\Query\Result\ResultInterface;
 
-/**
- * @author David Matejka
- */
 interface IQueryable
 {
 
@@ -16,7 +14,7 @@ interface IQueryable
 	 * @param mixed options
 	 * @return QueryInterface
 	 */
-	public function createQuery($type, $options = NULL);
+	public function createQuery($type, $options = null);
 
 
 	/**
@@ -24,6 +22,6 @@ interface IQueryable
 	 * @param Endpoint|string|null
 	 * @return ResultInterface
 	 */
-	public function execute(QueryInterface $query, $endpoint = NULL);
+	public function execute(QueryInterface $query, $endpoint = null);
 
 }

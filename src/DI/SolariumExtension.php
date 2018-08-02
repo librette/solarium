@@ -1,4 +1,5 @@
 <?php
+
 namespace Librette\Solarium\DI;
 
 use Kdyby\Events\DI\EventsExtension;
@@ -7,36 +8,34 @@ use Nette;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ServiceDefinition;
 
-/**
- * @author    David Matějka
- */
 class SolariumExtension extends CompilerExtension
 {
 
-	const AUTO = NULL;
+	const AUTO = null;
 
 	public $defaults = [
-		'debugger'   => '%debugMode%',
-		'endpoints'  => [],
+		'debugger' => '%debugMode%',
+		'endpoints' => [],
 		'queryTypes' => [
 			DataImportQuery::QUERY_DATAIMPORT => 'Librette\Solarium\QueryType\DataImport\Query',
 		],
-		'plugins'    => [],
+		'plugins' => [],
 	];
 
 	public $endpointDefaults = [
-		'host'    => '127.0.0.1',
-		'port'    => 8983,
-		'path'    => '/solr',
-		'core'    => NULL,
+		'host' => '127.0.0.1',
+		'port' => 8983,
+		'path' => '/solr',
+		'core' => null,
 		'timeout' => 5,
-		'default' => NULL,
+		'default' => null,
 	];
+
 
 	public function __construct()
 	{
 		if (PHP_SAPI === 'cli') {
-			$this->defaults['debugger'] = FALSE;
+			$this->defaults['debugger'] = false;
 		}
 	}
 
@@ -46,11 +45,11 @@ class SolariumExtension extends CompilerExtension
 		$config = $this->getConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
 		$solarium = $builder->addDefinition($this->prefix('client'))
-		                    ->setClass('Librette\Solarium\Client', [[]]);
+			->setClass('Librette\Solarium\Client', [[]]);
 		if ($config['debugger']) {
 			$panel = $builder->addDefinition($this->prefix('panel'))
-			                 ->setClass('Librette\Solarium\Diagnostics\Panel')
-			                 ->setFactory('Librette\Solarium\Diagnostics\Panel::register', [$this->prefix('@client')]);
+				->setClass('Librette\Solarium\Diagnostics\Panel')
+				->setFactory('Librette\Solarium\Diagnostics\Panel::register', [$this->prefix('@client')]);
 			$panel->addTag(EventsExtension::TAG_SUBSCRIBER);
 		}
 		$this->configureEndpoints($config, $solarium);
@@ -109,12 +108,12 @@ class SolariumExtension extends CompilerExtension
 			$endpoints = $config['endpoints'];
 		}
 		$solarium->addSetup('clearEndpoints');
-		$default = TRUE;
+		$default = true;
 		foreach ($endpoints as $name => $options) {
 			$options += $this->endpointDefaults;
 			$options += ['key' => $name];
-			$solarium->addSetup('addEndpoint', [array_diff_key($options, ['default' => TRUE])]);
-			if (($default === TRUE && $options['default'] === NULL) || $options['default'] === TRUE) {
+			$solarium->addSetup('addEndpoint', [array_diff_key($options, ['default' => true])]);
+			if (($default === true && $options['default'] === null) || $options['default'] === true) {
 				$solarium->addSetup('setDefaultEndpoint', [$name]);
 			}
 		}

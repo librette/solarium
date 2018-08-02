@@ -1,14 +1,14 @@
 <?php
+
 namespace Librette\Solarium\Expressions;
 
-use Nette\Object;
+use Nette\SmartObject;
 use Solarium\Core\Query\Helper;
 
-/**
- * @author David Matejka
- */
-class Parametrized extends Object implements IExpression
+
+class Parametrized implements IExpression
 {
+	use SmartObject;
 
 	/** @var string */
 	protected $query;

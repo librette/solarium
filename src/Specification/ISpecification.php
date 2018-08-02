@@ -1,11 +1,9 @@
 <?php
+
 namespace Librette\Solarium\Specification;
 
 use Solarium\QueryType\Select\Query\Query;
 
-/**
- * @author David Matejka
- */
 interface ISpecification
 {
 

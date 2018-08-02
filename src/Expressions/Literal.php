@@ -1,13 +1,13 @@
 <?php
+
 namespace Librette\Solarium\Expressions;
 
-use Nette\Object;
+use Nette\SmartObject;
 
-/**
- * @author David Matejka
- */
-class Literal extends Object implements IExpression
+
+class Literal implements IExpression
 {
+	use SmartObject;
 
 	/** @var string */
 	protected $value;

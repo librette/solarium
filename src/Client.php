@@ -1,16 +1,14 @@
 <?php
+
 namespace Librette\Solarium;
 
 use Solarium\Client as BaseClient;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author David Matejka
- */
 class Client extends BaseClient implements IQueryable
 {
 
-	public function __construct($options = NULL, EventDispatcherInterface $eventDispatcher = NULL)
+	public function __construct($options = null, EventDispatcherInterface $eventDispatcher = null)
 	{
 		parent::__construct($options);
 		if ($eventDispatcher) {

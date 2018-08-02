@@ -1,9 +1,7 @@
 <?php
+
 namespace Librette\Solarium;
 
-/**
- * @author David Matejka
- */
 interface IQuery
 {
 

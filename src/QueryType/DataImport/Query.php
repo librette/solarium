@@ -1,12 +1,10 @@
 <?php
+
 namespace Librette\Solarium\QueryType\DataImport;
 
-use Solarium\Core\Query\Query as BaseQuery;
+use Solarium\Core\Query\AbstractQuery;
 
-/**
- * @author David Matejka
- */
-class Query extends BaseQuery
+class Query extends AbstractQuery
 {
 
 	const QUERY_DATAIMPORT = 'dataimport';
@@ -15,11 +13,10 @@ class Query extends BaseQuery
 	const COMMAND_DELTA_IMPORT = 'delta-import';
 	const COMMAND_STATUS = 'status';
 
-
 	protected $options = [
 		'resultclass' => 'Librette\Solarium\QueryType\DataImport\Result',
-		'handler'     => 'dataimport',
-		'command'     => self::COMMAND_FULL_IMPORT
+		'handler' => 'dataimport',
+		'command' => self::COMMAND_FULL_IMPORT
 	];
 
 
@@ -106,13 +103,13 @@ class Query extends BaseQuery
 
 	public function getVerbose()
 	{
-		return FALSE;
+		return false;
 	}
 
 
 	public function getDebug()
 	{
-		return FALSE;
+		return false;
 	}
 
 

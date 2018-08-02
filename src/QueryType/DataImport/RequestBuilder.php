@@ -1,14 +1,12 @@
 <?php
+
 namespace Librette\Solarium\QueryType\DataImport;
 
 use Solarium\Core\Client\Request;
+use Solarium\Core\Query\AbstractRequestBuilder;
 use Solarium\Core\Query\QueryInterface;
-use Solarium\Core\Query\RequestBuilder as BaseRequestBuilder;
 
-/**
- * @author David Matejka
- */
-class RequestBuilder extends BaseRequestBuilder
+class RequestBuilder extends AbstractRequestBuilder
 {
 
 	public function build(QueryInterface $query)

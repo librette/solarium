@@ -1,14 +1,14 @@
 <?php
+
 namespace Librette\Solarium;
 
-use Nette\Object;
+use Nette\SmartObject;
 use Solarium\QueryType\Select\Query\Query as SelectQuery;
 
-/**
- * @author David Matejka
- */
-abstract class QueryObject extends Object implements IQuery
+abstract class QueryObject implements IQuery
 {
+	use SmartObject;
+
 
 	abstract protected function doPrepareQuery(SelectQuery $query);
 
@@ -16,6 +16,7 @@ abstract class QueryObject extends Object implements IQuery
 	public function fetch(IQueryable $queryable)
 	{
 		$select = $queryable->createQuery(Client::QUERY_SELECT);
+		assert($select instanceof SelectQuery);
 		$this->doPrepareQuery($select);
 
 		return new ResultSet($select, $queryable, $this);

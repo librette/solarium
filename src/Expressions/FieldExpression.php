@@ -1,13 +1,13 @@
 <?php
+
 namespace Librette\Solarium\Expressions;
 
-use Nette\Object;
+use Nette\SmartObject;
 
-/**
- * @author David Matejka
- */
-class FieldExpression extends Object implements IExpression
+
+class FieldExpression implements IExpression
 {
+	use SmartObject;
 
 	/** @var string */
 	protected $field;

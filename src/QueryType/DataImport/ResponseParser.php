@@ -1,13 +1,11 @@
 <?php
+
 namespace Librette\Solarium\QueryType\DataImport;
 
-use Solarium\Core\Query\ResponseParser as ResponseParserAbstract;
+use Solarium\Core\Query\AbstractResponseParser;
 use Solarium\Core\Query\ResponseParserInterface as ResponseParserInterface;
 
-/**
- * Parse Data import response data
- */
-class ResponseParser extends ResponseParserAbstract implements ResponseParserInterface
+class ResponseParser extends AbstractResponseParser implements ResponseParserInterface
 {
 
 	/**

@@ -1,13 +1,12 @@
 <?php
+
 namespace Librette\Solarium\Expressions;
 
-use Nette\Object;
+use Nette\SmartObject;
 
-/**
- * @author David Matejka
- */
-abstract class Composite extends Object implements IExpression
+abstract class Composite implements IExpression
 {
+	use SmartObject;
 
 	/** @var IExpression[] */
 	protected $args;
@@ -29,8 +28,8 @@ abstract class Composite extends Object implements IExpression
 	public function build()
 	{
 		return '(' . implode($this->getSeparator(), array_map(function (IExpression $expression) {
-			return $expression->build();
-		}, $this->args)) . ')';
+				return $expression->build();
+			}, $this->args)) . ')';
 	}
 
 
@@ -45,9 +44,9 @@ abstract class Composite extends Object implements IExpression
 	 * @param callable
 	 * @return self
 	 */
-	public static function fromArray($data, $formatter = NULL)
+	public static function fromArray($data, $formatter = null)
 	{
-		if ($formatter == NULL) {
+		if ($formatter == null) {
 			$formatter = function ($val) {
 				if (!$val instanceof IExpression) {
 					$val = new Literal($val);

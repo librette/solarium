@@ -1,12 +1,10 @@
 <?php
+
 namespace Librette\Solarium\Specification;
 
 use Librette\Solarium\Expressions\IExpression;
 use Librette\Solarium\Expressions\Not;
 
-/**
- * @author David Matejka
- */
 trait TInversable
 {
 
@@ -14,7 +12,7 @@ trait TInversable
 	protected $inversed;
 
 
-	public function inverse($inverse = TRUE)
+	public function inverse($inverse = true)
 	{
 		$this->inversed = $inverse;
 	}

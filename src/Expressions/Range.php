@@ -1,13 +1,13 @@
 <?php
+
 namespace Librette\Solarium\Expressions;
 
-use Nette\Object;
+use Nette\SmartObject;
 
-/**
- * @author David Matejka
- */
-class Range extends Object implements IExpression
+
+class Range implements IExpression
 {
+	use SmartObject;
 
 	const ANY = '*';
 
@@ -28,8 +28,8 @@ class Range extends Object implements IExpression
 	 */
 	function __construct($from, $to, $precision = 2)
 	{
-		$this->from = $from === NULL ? self::ANY : $from;
-		$this->to = $to === NULL ? self::ANY : $to;
+		$this->from = $from === null ? self::ANY : $from;
+		$this->to = $to === null ? self::ANY : $to;
 		$this->precision = $precision;
 	}
 
