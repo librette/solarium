@@ -1,5 +1,6 @@
 {
 	"name": "librette/solarium",
+	"description": "Solarium integration for Nette framework",
 	"type": "library",
 	"keywords": ["nette", "librette", "solarium"],
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
