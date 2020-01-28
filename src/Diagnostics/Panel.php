@@ -23,6 +23,7 @@ use Solarium\QueryType\Select\Result\Result as SelectResult;
 use Tracy\Debugger;
 use Tracy\Dumper;
 use Tracy\IBarPanel;
+use function GuzzleHttp\Psr7\parse_query;
 
 
 class Panel implements IBarPanel, Subscriber
@@ -196,9 +197,16 @@ class Panel implements IBarPanel, Subscriber
 			echo '<h3 style="font-weight:bold;font-size: 15px">Request:</h3>';
 			echo '<div>' . $request->getMethod() . ': ' . $request->getUri() . '</div>';
 			echo '<h3 style="font-weight:bold;font-size: 13px">Parameters:</h3><table style="margin-top: 5px">';
-			foreach ($request->getParams() as $key => $value) {
+			$params = $request->getParams();
+			if (empty($params)) {
+				$params = parse_query($request->getRawData());
+			}
+			foreach ($params as $key => $value) {
+				if ($key === 'json.facet') {
+					$value = Json::decode($value);
+				}
 				echo '<tr><th>' . $key . '</th><td>';
-				Dumper::dump($value);
+				Dumper::dump($value, ['truncate' => 500]);
 				echo '</td></tr>';
 			}
 			echo '</table>';
