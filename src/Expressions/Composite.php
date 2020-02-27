@@ -16,7 +16,7 @@ abstract class Composite implements IExpression
 	 * @param IExpression|IExpression[]
 	 * @param ...
 	 */
-	public function __construct($args)
+	final public function __construct($args)
 	{
 		$this->args = is_array($args) ? $args : func_get_args();
 	}
