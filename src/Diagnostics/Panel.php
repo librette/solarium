@@ -85,7 +85,7 @@ class Panel implements IBarPanel, Subscriber
 		$result = $event->getResult();
 		$data = $event->getResult()->getData();
 		$this->totalTime += isset($data['responseHeader']['QTime']) ? $data['responseHeader']['QTime'] : 0;
-		if ($result instanceof SelectResult && $result->getDebug()->getTiming() !== null) {
+		if ($result instanceof SelectResult && $result->getDebug() && $result->getDebug()->getTiming() !== null) {
 			$this->totalTime -= $result->getDebug()->getTiming()->getPhase('process')->getTiming('debug');
 		}
 	}
