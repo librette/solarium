@@ -16,7 +16,7 @@
 		}
 	},
 	"require": {
-		"solarium/solarium": "~5.2",
+		"solarium/solarium": ">= 6.0",
 		"kdyby/events": "*",
 		"nette/di": "~2.4 || ~3.0",
 		"nette/utils": "~2.4 || ~3.0"
