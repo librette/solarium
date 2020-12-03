@@ -3,7 +3,6 @@
 namespace Librette\Solarium\DI;
 
 use Kdyby\Events\DI\EventsExtension;
-use Librette\Solarium\QueryType\DataImport\Query as DataImportQuery;
 use Nette;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ServiceDefinition;
@@ -17,7 +16,6 @@ class SolariumExtension extends CompilerExtension
 		'debugger' => '%debugMode%',
 		'endpoints' => [],
 		'queryTypes' => [
-			DataImportQuery::QUERY_DATAIMPORT => 'Librette\Solarium\QueryType\DataImport\Query',
 		],
 		'plugins' => [],
 	];
