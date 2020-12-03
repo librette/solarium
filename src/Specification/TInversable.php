@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Specification;
 
@@ -9,25 +9,22 @@ trait TInversable
 {
 
 	/** @var bool */
-	protected $inversed;
+	protected $inversed = false;
 
 
-	public function inverse($inverse = true)
+	public function inverse(bool $inverse = true): void
 	{
 		$this->inversed = $inverse;
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	public function isInversed()
+	public function isInversed(): bool
 	{
 		return $this->inversed;
 	}
 
 
-	protected function doInverse(IExpression $expression)
+	protected function doInverse(IExpression $expression): IExpression
 	{
 		if ($this->isInversed()) {
 			return $this->_doInverse($expression);
@@ -37,7 +34,7 @@ trait TInversable
 	}
 
 
-	protected function _doInverse(IExpression $expression)
+	protected function _doInverse(IExpression $expression): IExpression
 	{
 		if ($expression instanceof Not) {
 			return $expression->getExpression();

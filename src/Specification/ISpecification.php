@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Specification;
 
@@ -7,14 +7,8 @@ use Solarium\QueryType\Select\Query\Query;
 interface ISpecification
 {
 
-	/**
-	 * @param Query
-	 */
-	public function match(Query $query);
+	public function match(Query $query): void;
 
 
-	/**
-	 * @param Query
-	 */
-	public function modifyQuery(Query $query);
+	public function modifyQuery(Query $query): void;
 }

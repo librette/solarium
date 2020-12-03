@@ -1,13 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Specification;
 
 interface IInversableSpecification
 {
-
-	/**
-	 * @param bool
-	 * @return void
-	 */
-	public function inverse($inverse = true);
+	public function inverse(bool $inverse = true): void;
 }

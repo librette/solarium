@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Specification;
 
@@ -6,10 +6,5 @@ use Librette\Solarium\Expressions\IExpression;
 
 interface IExpressionQuery
 {
-
-	/**
-	 * @return IExpression
-	 */
-	public function getExpression();
-
+	public function getExpression(): IExpression;
 }

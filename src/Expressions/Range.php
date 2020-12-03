@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Expressions;
 
@@ -26,7 +26,7 @@ class Range implements IExpression
 	 * @param string|float|int
 	 * @param int only for float
 	 */
-	function __construct($from, $to, $precision = 2)
+	function __construct($from, $to, int $precision = 2)
 	{
 		$this->from = $from === null ? self::ANY : $from;
 		$this->to = $to === null ? self::ANY : $to;
@@ -34,7 +34,7 @@ class Range implements IExpression
 	}
 
 
-	public function build()
+	public function build(): string
 	{
 		return sprintf('[%s TO %s]', $this->formatValue($this->from), $this->formatValue($this->to));
 	}
@@ -44,9 +44,8 @@ class Range implements IExpression
 	 * @param float|int|string $value
 	 * @return string
 	 */
-	private function formatValue($value)
+	private function formatValue($value): string
 	{
 		return is_float($value) ? number_format($value, $this->precision, '.', '') : (string) $value;
 	}
-
 }

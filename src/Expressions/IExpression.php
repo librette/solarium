@@ -1,13 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Expressions;
 
 
 interface IExpression
 {
-
-	/**
-	 * @return string
-	 */
-	public function build();
+	public function build(): string;
 }

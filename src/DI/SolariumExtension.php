@@ -1,17 +1,16 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\DI;
 
 use Kdyby\Events\DI\EventsExtension;
+use Librette\Solarium\Diagnostics\Panel;
 use Nette;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ServiceDefinition;
+use Solarium\Client;
 
 class SolariumExtension extends CompilerExtension
 {
-
-	const AUTO = null;
-
 	public $defaults = [
 		'debugger' => '%debugMode%',
 		'endpoints' => [],
@@ -43,11 +42,11 @@ class SolariumExtension extends CompilerExtension
 		$config = $this->getConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
 		$solarium = $builder->addDefinition($this->prefix('client'))
-			->setClass('Librette\Solarium\Client', [[]]);
+			->setClass(Client::class, [[]]);
 		if ($config['debugger']) {
 			$panel = $builder->addDefinition($this->prefix('panel'))
-				->setClass('Librette\Solarium\Diagnostics\Panel')
-				->setFactory('Librette\Solarium\Diagnostics\Panel::register', [$this->prefix('@client')]);
+				->setClass(Panel::class)
+				->setFactory(Panel::class . '::register', [$this->prefix('@client')]);
 			$panel->addTag(EventsExtension::TAG_SUBSCRIBER);
 		}
 		$this->configureEndpoints($config, $solarium);
@@ -121,7 +120,7 @@ class SolariumExtension extends CompilerExtension
 	public function afterCompile(Nette\PhpGenerator\ClassType $class)
 	{
 		$initialize = $class->methods['initialize'];
-		$initialize->addBody('Librette\Solarium\Diagnostics\Panel::registerBluescreen();');
+		$initialize->addBody(Panel::class . '::registerBluescreen();');
 	}
 
 }

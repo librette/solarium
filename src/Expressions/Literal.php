@@ -13,30 +13,20 @@ class Literal implements IExpression
 	protected $value;
 
 
-	/**
-	 * @param string $value
-	 */
-	function __construct($value)
+	function __construct(string $value)
 	{
 		$this->value = $value;
 	}
 
 
-	/**
-	 * @return string
-	 */
-	public function getValue()
+	public function getValue(): string
 	{
 		return $this->value;
 	}
 
 
-	/**
-	 * @return string
-	 */
-	public function build()
+	public function build(): string
 	{
 		return (string) $this->value;
 	}
-
 }

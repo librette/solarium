@@ -4,10 +4,8 @@ namespace Librette\Solarium\Expressions;
 
 class OrX extends Composite
 {
-
-	protected function getSeparator()
+	protected function getSeparator(): string
 	{
 		return ' OR ';
 	}
-
 }

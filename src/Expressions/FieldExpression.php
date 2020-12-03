@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Expressions;
 
@@ -16,41 +16,27 @@ class FieldExpression implements IExpression
 	protected $expression;
 
 
-	/**
-	 * @param string
-	 * @param IExpression|string
-	 */
-	public function __construct($field, $expression)
+	public function __construct(string $field, $expression)
 	{
 		$this->field = $field;
 		$this->expression = $expression instanceof IExpression ? $expression : new Literal($expression);
 	}
 
 
-	/**
-	 * @return IExpression
-	 */
-	public function getExpression()
+	public function getExpression(): IExpression
 	{
 		return $this->expression;
 	}
 
 
-	/**
-	 * @return string
-	 */
-	public function getField()
+	public function getField(): string
 	{
 		return $this->field;
 	}
 
 
-	/**
-	 * @return string
-	 */
-	public function build()
+	public function build(): string
 	{
 		return sprintf('%s:(%s)', $this->field, $this->expression->build());
 	}
-
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Expressions;
 
@@ -22,10 +22,7 @@ abstract class Composite implements IExpression
 	}
 
 
-	/**
-	 * @return string
-	 */
-	public function build()
+	public function build(): string
 	{
 		return '(' . implode($this->getSeparator(), array_map(function (IExpression $expression) {
 				return $expression->build();
@@ -33,18 +30,10 @@ abstract class Composite implements IExpression
 	}
 
 
-	/**
-	 * @return string
-	 */
-	protected abstract function getSeparator();
+	protected abstract function getSeparator(): string;
 
 
-	/**
-	 * @param array
-	 * @param callable
-	 * @return self
-	 */
-	public static function fromArray($data, $formatter = null)
+	public static function fromArray(array $data, ?callable $formatter = null): self
 	{
 		if ($formatter == null) {
 			$formatter = function ($val) {

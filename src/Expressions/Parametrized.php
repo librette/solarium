@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Expressions;
 
@@ -17,18 +17,14 @@ class Parametrized implements IExpression
 	protected $parameters;
 
 
-	/**
-	 * @param string
-	 * @param array
-	 */
-	function __construct($query, $parameters = [])
+	function __construct(string $query, array $parameters = [])
 	{
 		$this->query = $query;
 		$this->parameters = $parameters;
 	}
 
 
-	public function build()
+	public function build(): string
 	{
 		if (!empty($this->parameters)) {
 			$helper = new Helper();

@@ -11,13 +11,12 @@
 		}
 	],
 	"autoload": {
-		"files": ["src/exceptions.php"],
 		"psr-4": {
 			"Librette\\Solarium\\": "src/"
 		}
 	},
 	"require": {
-		"solarium/solarium": "~4.0",
+		"solarium/solarium": "~5.2",
 		"kdyby/events": "*",
 		"nette/di": "~2.4 || ~3.0",
 		"nette/utils": "~2.4 || ~3.0"

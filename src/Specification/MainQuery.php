@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Specification;
 
@@ -30,16 +30,13 @@ class MainQuery implements ISpecification, IExpressionQuery
 	}
 
 
-	/**
-	 * @return IExpression|null
-	 */
-	public function getExpression()
+	public function getExpression(): IExpression
 	{
 		return $this->expression;
 	}
 
 
-	public function match(Query $query)
+	public function match(Query $query): void
 	{
 		if ($this->expression && ($queryString = $this->expression->build()) !== null) {
 			$query->setQuery($queryString);
@@ -47,9 +44,8 @@ class MainQuery implements ISpecification, IExpressionQuery
 	}
 
 
-	public function modifyQuery(Query $query)
+	public function modifyQuery(Query $query): void
 	{
-
 	}
 
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Expressions;
 
@@ -13,30 +13,20 @@ class Not implements IExpression
 	protected $expression;
 
 
-	/**
-	 * @param IExpression $expression
-	 */
 	public function __construct(IExpression $expression)
 	{
 		$this->expression = $expression;
 	}
 
 
-	/**
-	 * @return IExpression
-	 */
-	public function getExpression()
+	public function getExpression(): IExpression
 	{
 		return $this->expression;
 	}
 
 
-	/**
-	 * @return string
-	 */
-	public function build()
+	public function build(): string
 	{
 		return 'NOT(' . $this->expression->build() . ')';
 	}
-
 }

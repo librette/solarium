@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Librette\Solarium\Specification;
 
@@ -38,30 +38,28 @@ class FilterQuery implements IInversableSpecification, ISpecification, IExpressi
 	}
 
 
-	/**
-	 * @return IExpression
-	 */
-	public function getExpression()
+	public function getExpression(): IExpression
 	{
 		return $this->expression;
 	}
 
 
-	public function match(Query $query)
+	public function match(Query $query): void
 	{
-		if (($fq = $this->createFilterQuery($query)) !== null) {
+		$fq = $this->createFilterQuery($query);
+		if ($fq !== null) {
 			$query->addFilterQuery($fq);
 		}
 	}
 
 
-	public function modifyQuery(Query $query)
+	public function modifyQuery(Query $query): void
 	{
 
 	}
 
 
-	protected function createFilterQuery(Query $query)
+	protected function createFilterQuery(Query $query): ?\Solarium\QueryType\Select\Query\FilterQuery
 	{
 		if ($this->expression === null) {
 			return null;
